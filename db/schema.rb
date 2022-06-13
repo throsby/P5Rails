@@ -10,16 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_13_155940) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_13_162341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "greenhouses", force: :cascade do |t|
+    t.string "nickname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "plants", force: :cascade do |t|
     t.string "species"
     t.float "water_need"
     t.float "maturation_rate"
     t.float "price"
-    t.integer "cell_id"
+    t.integer "plot_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

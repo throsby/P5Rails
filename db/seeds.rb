@@ -1,13 +1,15 @@
 puts "🌱 Seeding spices..."
 
+greenhouse = Greenhouse.create(nickname: "Ivy")
 
-tower1 = Tower.create(next_neighbor: nil, greenhouse_id: 0)
-tower2 = Tower.create(next_neighbor: tower1.id, greenhouse_id: 0)
-tower3 = Tower.create(next_neighbor: tower2.id, greenhouse_id: 0)
-tower4 = Tower.create(next_neighbor: tower3.id, greenhouse_id: 0)
+puts "🏠 Seeded greenhouse"
+
+tower1 = Tower.create(next_neighbor: nil, greenhouse_id: greenhouse.id)
+tower2 = Tower.create(next_neighbor: tower1.id, greenhouse_id: greenhouse.id)
+tower3 = Tower.create(next_neighbor: tower2.id, greenhouse_id: greenhouse.id)
+tower4 = Tower.create(next_neighbor: tower3.id, greenhouse_id: greenhouse.id)
 
 puts "🏰 Towers seeded"
-
 
 #In order for the following_plot ids to be common sense, the instantiations must be upside-down
 plot4 = Plot.create(water_level: 0, following_plot: nil, dehydration_rate: 0.1, tower_id: tower1.id)
@@ -29,5 +31,7 @@ plot16 = Plot.create(water_level: 0, following_plot: nil, dehydration_rate: 0.1,
 plot15 = Plot.create(water_level: 0, following_plot: plot16.id, dehydration_rate: 0.1, tower_id: tower4.id)
 plot14 = Plot.create(water_level: 0, following_plot: plot15.id, dehydration_rate: 0.1, tower_id: tower4.id)
 plot13 = Plot.create(water_level: 0, following_plot: plot14.id, dehydration_rate: 0.1, tower_id: tower4.id)
+
+puts "🪴 Plots seeded"
 
 puts "✅ Done seeding!"
