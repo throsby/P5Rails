@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  water_level: 1
+  following_plot: 1
+  dehydration_rate: 1.5
+  tower_id: 1
+
+two:
+  water_level: 1
+  following_plot: 1
+  dehydration_rate: 1.5
+  tower_id: 1
