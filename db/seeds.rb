@@ -34,4 +34,6 @@ plot13 = Plot.create(water_level: 0, following_plot: plot14.id, dehydration_rate
 
 puts "🪴 Plots seeded"
 
+
+
 puts "✅ Done seeding!"
