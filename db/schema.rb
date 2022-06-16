@@ -35,15 +35,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_162341) do
     t.integer "following_plot"
     t.float "dehydration_rate"
     t.integer "tower_id"
+    t.integer "plot_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "towers", force: :cascade do |t|
     t.integer "next_neighbor"
+    t.integer "tower_number"
+    t.integer "greenhouse_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "greenhouse_id"
   end
 
 end

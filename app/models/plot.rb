@@ -1,6 +1,6 @@
 class Plot < ApplicationRecord
     belongs_to :tower
-    has_one :plant
+    has_one :plant, dependent: :destroy
 
     def top
         self.tower.plots[0]

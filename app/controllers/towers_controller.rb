@@ -1,8 +1,13 @@
 class TowersController < ApplicationController
     
     def index
-        @towers = Tower.all
-        render json: @towers, status: 200
+        hash_out = {}
+        Tower.all.each do |tower|
+            p tower.id
+            hash_out[tower["id"]] = tower.plots.order("id ASC")
+        end
+        # @towers = Tower.all
+        render json: hash_out, status: 200
     end
 
     def plots
@@ -38,8 +43,8 @@ class TowersController < ApplicationController
       end
 
       def create
-        @newTower = Tower.create(next_neighbor: Tower.last.id)
+        @newTower = Tower.create(next_neighbor: Tower.last.id, greenhouse: Greenhouse.last, tower_number: Tower.last.tower_number + 1)
         @newTower.plotPopulate
-        render json: @newTower, status: 200
+        render json: {@newTower[:tower_number] => @newTower.plots}, status: 200
       end
 end

@@ -8,10 +8,11 @@ Rails.application.routes.draw do
 
 
     get "/towers", to: "towers#index"
-    get "/towerplots", to: "towers#plots"
+    get "/towerplots", to: "towers#index"
     patch "/plots/:plot_id/water", to: "plots#water"
-    patch "/plots/:plot_id/sample", to: "plots#sample"
-    
+    patch "/plots/:plot_id/sample", to: "plots#dryOut"
+    post "/towers", to: "towers#create"
+    delete "/towers", to: "towers#destroy"
     # get "/towers/:id", to: "towers#show"
 
     # put "/towers", to: "towers#create"

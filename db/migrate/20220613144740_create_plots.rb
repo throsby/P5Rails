@@ -5,6 +5,7 @@ class CreatePlots < ActiveRecord::Migration[7.0]
       t.integer :following_plot
       t.float :dehydration_rate
       t.integer :tower_id
+      t.integer :plot_number, serial: true
 
       t.timestamps
     end

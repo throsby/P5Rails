@@ -1,5 +1,5 @@
 class Tower < ApplicationRecord
-    has_many :plots
+    has_many :plots, dependent: :destroy
     belongs_to :greenhouse
     has_many :plants, through: :plots
 
@@ -25,9 +25,9 @@ class Tower < ApplicationRecord
     end
 
     def plotPopulate        
-        botPlot = Plot.create(water_level: 0, following_plot: nil, dehydration_rate: 0.1, tower_id: self.id)        
-        lowMidPlot = Plot.create(water_level: 0, following_plot: botPlot.id, dehydration_rate: 0.1, tower_id: self.id)
-        highMidPlot = Plot.create(water_level: 0, following_plot: lowMidPlot.id, dehydration_rate: 0.1, tower_id: self.id)
-        topPlot = Plot.create(water_level: 0, following_plot: highMidPlot.id, dehydration_rate: 0.1, tower_id: self.id)
+        botPlot = Plot.create(water_level: 0, following_plot: nil, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)        
+        lowMidPlot = Plot.create(water_level: 0, following_plot: botPlot.id, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)
+        highMidPlot = Plot.create(water_level: 0, following_plot: lowMidPlot.id, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)
+        topPlot = Plot.create(water_level: 0, following_plot: highMidPlot.id, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)
     end
 end
