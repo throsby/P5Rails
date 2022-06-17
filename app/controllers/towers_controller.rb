@@ -3,8 +3,7 @@ class TowersController < ApplicationController
     def index
         hash_out = {}
         Tower.all.each do |tower|
-            p tower.id
-            hash_out[tower["id"]] = tower.plots.order("id ASC")
+            hash_out[tower["tower_number"]] = tower.plots.order("id ASC")
         end
         # @towers = Tower.all
         render json: hash_out, status: 200
@@ -40,11 +39,11 @@ class TowersController < ApplicationController
           hash_out[tower.id] = tower.plots
         end
         render json: hash_out
-      end
+    end
 
-      def create
+    def create
         @newTower = Tower.create(next_neighbor: Tower.last.id, greenhouse: Greenhouse.last, tower_number: Tower.last.tower_number + 1)
         @newTower.plotPopulate
         render json: {@newTower[:tower_number] => @newTower.plots}, status: 200
-      end
+    end
 end
