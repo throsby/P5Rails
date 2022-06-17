@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     patch "/plots/:plot_id/sample", to: "plots#dryOut"
     post "/towers", to: "towers#create"
     delete "/towers", to: "towers#destroy"
+
+    get "/greenhouses", to: "greenhouses#index"
     # get "/towers/:id", to: "towers#show"
 
     # put "/towers", to: "towers#create"

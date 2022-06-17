@@ -1,7 +1,7 @@
 class GreenhousesController < ApplicationController
     def index
         @greenhouses = Greenhouse.all
-        render json: @greenhouses
+        render json: @greenhouses, status: 200
     end
 
     def show
@@ -12,5 +12,4 @@ class GreenhousesController < ApplicationController
             render json: {error: "Greenhouse not found"}, status: 404
         end
     end
-
 end
