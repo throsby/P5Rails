@@ -1,13 +1,14 @@
 puts "🌱 Seeding spices..."
 
-greenhouse = Greenhouse.create(nickname: "Ivy")
+greenhouse1 = Greenhouse.create(nickname: "Ivy")
+greenhouse2 = Greenhouse.create(nickname: "Desert")
 
 puts "🏠 Seeded greenhouse"
 
-tower1 = Tower.create(next_neighbor: nil, greenhouse_id: greenhouse.id, tower_number: (Tower.last == nil ? 1 : Tower.last.id + 1))
-tower2 = Tower.create(next_neighbor: tower1.id, greenhouse_id: greenhouse.id, tower_number: Tower.last.id + 1)
-tower3 = Tower.create(next_neighbor: tower2.id, greenhouse_id: greenhouse.id, tower_number: Tower.last.id + 1)
-tower4 = Tower.create(next_neighbor: tower3.id, greenhouse_id: greenhouse.id, tower_number: Tower.last.id + 1)
+tower1 = Tower.create(next_neighbor: nil, greenhouse_id: greenhouse1.id, tower_number: (Tower.last == nil ? 1 : Tower.last.id + 1))
+tower2 = Tower.create(next_neighbor: tower1.id, greenhouse_id: greenhouse1.id, tower_number: Tower.last.id + 1)
+tower3 = Tower.create(next_neighbor: tower2.id, greenhouse_id: greenhouse1.id, tower_number: Tower.last.id + 1)
+tower4 = Tower.create(next_neighbor: tower3.id, greenhouse_id: greenhouse1.id, tower_number: Tower.last.id + 1)
 
 puts "🏰 Towers seeded"
 

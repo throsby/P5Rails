@@ -12,4 +12,9 @@ class GreenhousesController < ApplicationController
             render json: {error: "Greenhouse not found"}, status: 404
         end
     end
+
+    def towers
+        @towers = Towers.where(greenhouse_id: params[:id])
+    end
+
 end

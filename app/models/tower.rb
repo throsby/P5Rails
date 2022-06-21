@@ -3,6 +3,13 @@ class Tower < ApplicationRecord
     belongs_to :greenhouse
     has_many :plants, through: :plots
 
+
+    # def create
+    
+    
+    # end
+
+
     def topPlot
         self.plots[0]
     end
@@ -29,5 +36,12 @@ class Tower < ApplicationRecord
         lowMidPlot = Plot.create(water_level: 0, following_plot: botPlot.id, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)
         highMidPlot = Plot.create(water_level: 0, following_plot: lowMidPlot.id, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)
         topPlot = Plot.create(water_level: 0, following_plot: highMidPlot.id, dehydration_rate: 0.1, tower_id: self.id, plot_number: Plot.last.plot_number + 1)
+        return self
+    end
+
+    def create_by_greenhouse(greenhouse_id)
+        @newTower = Tower.create(next_neighbor: Tower.last.id, greenhouse: Greenhouse.find_by(greenhouse_id), tower_number: Tower.last.tower_number + 1)
+        @newTower.plotPopulate
+        return @newTower
     end
 end

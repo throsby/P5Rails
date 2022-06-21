@@ -1,13 +1,30 @@
 class TowersController < ApplicationController
     
-    def index
+    def index_gh
         hash_out = {}
-        Tower.all.each do |tower|
+        Tower.where(greenhouse_id: params[:id]).each do |tower|
+            p tower
             hash_out[tower["tower_number"]] = tower.plots.order("id ASC")
         end
-        # @towers = Tower.all
         render json: hash_out, status: 200
     end
+
+    def index
+        hash_out = {}
+        Greenhouse.all.each do |greenhouse|
+            hash_out[greenhouse[:id]] = greenhouse.towers.order("id ASC")
+        end
+        render json: hash_out, status: 200
+    end
+
+    # def index
+    #     hash_out = {}
+    #     Tower.all.each do |tower|
+    #         hash_out[tower["tower_number"]] = tower.plots.order("id ASC")
+    #     end
+    #     # @towers = Tower.all
+    #     render json: hash_out, status: 200
+    # end
 
     def plots
         arr_out = []
@@ -28,21 +45,45 @@ class TowersController < ApplicationController
     end
 
     def destroy
-        # Destroy the plots of the last tower
-        Tower.last.plots.each do |plot|
-          plot.destroy
+        Greenhouse.find_by(id: params[:id]).towers.last.plots.each do |plot|
+            plot.destroy
         end
-        # THEN Destroy the last tower
-        Tower.last.destroy
-        hash_out = {} #Hash of towers to-be
-        Tower.all.each do |tower|
-          hash_out[tower.id] = tower.plots
+
+        p "Parameter here\n"
+        p params[:id]
+        Greenhouse.find_by(id: params[:id]).towers.last.destroy
+        hash_out = {}
+        Greenhouse.find_by(id: params[:id]).towers.each do |tower|
+            hash_out[tower.tower_number] = tower.plots.order("id ASC")
         end
         render json: hash_out
     end
 
+    # def destroy
+    #     # Destroy the plots of the last tower
+    #     Tower.last.plots.each do |plot|
+    #       plot.destroy
+    #     end
+    #     # THEN Destroy the last tower
+    #     Tower.last.destroy
+    #     hash_out = {} #Hash of towers to-be
+    #     Tower.all.each do |tower|
+    #       hash_out[tower.id] = tower.plots
+    #     end
+    #     render json: hash_out
+    # end
+
     def create
         @newTower = Tower.create(next_neighbor: Tower.last.id, greenhouse: Greenhouse.last, tower_number: Tower.last.tower_number + 1)
+        @newTower.plotPopulate
+        render json: {@newTower[:tower_number] => @newTower.plots}, status: 200
+    end
+
+    def create_gh
+        # gh = Greenhouse.where(id: params)
+        (prev_tower = Tower.where(greenhouse: Greenhouse.find_by(id: params[:id])).last) || prev_tower = {id: 0, next_neighbor: nil, tower_number: 0}
+        @newTower = Tower.create(next_neighbor: prev_tower[:id], greenhouse: Greenhouse.find_by(id: params[:id]), tower_number: prev_tower[:tower_number] + 1)
+    
         @newTower.plotPopulate
         render json: {@newTower[:tower_number] => @newTower.plots}, status: 200
     end
