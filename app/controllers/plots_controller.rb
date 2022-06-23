@@ -21,9 +21,9 @@ class PlotsController < ApplicationController
         else
             render json: {error: "Plot #{params[:plot_id]} not found"}, status: 404
         end        
-      end
+    end
 
-      def dryOut
+    def dryOut
         @plot = Plot.find_by(id: params[:plot_id].to_i)
         if @plot
             @plot.dryOut
@@ -32,7 +32,5 @@ class PlotsController < ApplicationController
         else
             render json: {error: "Plot #{params[:plot_id]} not found"}, status: 404
         end        
-      end
-
-
+    end
 end
