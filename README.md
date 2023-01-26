@@ -24,3 +24,4 @@ Things you may want to cover:
 * ...
 
 <!-- Run 'bundle install' to download all the Ruby gems -->
+<!-- This is made to be run with 'rails s' on port 3000. The front end can be run on any port. -->

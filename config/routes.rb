@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :towers
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-    root 'welcome#index'
+
     get "/towers", to: "towers#index"
     get "/towerplots/:id", to: "towers#index_gh"
     get "/towerplots", to: "towers#index"
