@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+<!-- Run 'bundle install' to download all the Ruby gems -->
