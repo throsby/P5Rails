@@ -72,3 +72,5 @@ group :test do
 end
 
 gem 'rack-cors', :require => 'rack/cors'
+
+gem "dockerfile-rails", ">= 1.4", :group => :development
