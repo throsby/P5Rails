@@ -74,3 +74,9 @@ end
 gem 'rack-cors', :require => 'rack/cors'
 
 gem "dockerfile-rails", ">= 1.4", :group => :development
+
+
+# Gemfile
+gem 'ddtrace', require: 'ddtrace/auto_instrument'
+
+
